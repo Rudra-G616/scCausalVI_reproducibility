@@ -29,7 +29,7 @@ setup(
         "seaborn==0.12.2",
         "scipy==1.11.3",
         "scvi-tools==0.16.1",
-        "pytorch-lightning==1.5.10",
+        "pytorch-lightning==1.5.10.post0",
         "gdown==5.2.0"
     ],
     python_requires="==3.9.18",
