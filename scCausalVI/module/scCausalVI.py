@@ -6,7 +6,7 @@ import torch.nn.functional as F
 from scvi._constants import REGISTRY_KEYS
 from scvi.distributions import ZeroInflatedNegativeBinomial
 from scvi.module.base import BaseModuleClass, auto_move_data
-from scvi.train.utils import LossRecorder
+from scvi._utils import LossRecorder
 from scvi.nn import DecoderSCVI, Encoder, one_hot, FCLayers
 from torch import Tensor
 from torch.distributions import Normal
