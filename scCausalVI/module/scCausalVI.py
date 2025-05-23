@@ -6,7 +6,7 @@ import torch.nn.functional as F
 from scvi._constants import REGISTRY_KEYS
 from scvi.distributions import ZeroInflatedNegativeBinomial
 from scvi.module.base import BaseModuleClass, auto_move_data
-from scvi._utils import LossRecorder
+from scvi.module.base._base_module import LossOutput
 from scvi.nn import DecoderSCVI, Encoder, one_hot, FCLayers
 from torch import Tensor
 from torch.distributions import Normal
@@ -737,7 +737,7 @@ class scCausalVIModule(BaseModuleClass):
             inference_outputs: Dict[str, Dict[str, torch.Tensor]],
             generative_outputs: Dict[str, torch.Tensor],
             **loss_args,
-    ) -> LossRecorder:
+    ) -> LossOutput:
         """
         Compute loss terms for scCausalVI.
         Args:
@@ -916,7 +916,13 @@ class scCausalVIModule(BaseModuleClass):
                         loss_clf=loss_clf,
                         loss_mse=loss_mse)
         kl_global = torch.tensor(0.0)
-        return LossRecorder(loss, recon_loss, kl_local, kl_global)
+
+        return LossOutput(
+        loss=loss,
+        reconstruction_loss=recon_loss,
+        kl_local=kl_local,
+        kl_global=kl_global,
+    )
 
         # recon_loss = control_losses["recon_loss"] + treatment_losses["recon_loss"]
         # # kl_z = control_losses["kl_z"] + treatment_losses["kl_z"]
