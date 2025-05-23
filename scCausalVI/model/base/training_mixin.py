@@ -53,6 +53,7 @@ class scCausalVITrainingMixin:
 
         plan_kwargs = plan_kwargs if isinstance(plan_kwargs, dict) else dict()
 
+        adata_manager = self.get_adata_manager(None, required=True)
         data_splitter = scCausalVIDataSplitter(
             self.adata_manager,
             group_indices_list,
